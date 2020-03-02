@@ -41,6 +41,10 @@ class NeuralNetwork(object):
             targets: 1D array of target values
         
         '''
+        if len(targets.shape) == 1:
+            targets = targets[:, None]
+        features = np.array(features)
+
         n_records = features.shape[0]
         delta_weights_i_h = np.zeros(self.weights_input_to_hidden.shape)
         delta_weights_h_o = np.zeros(self.weights_hidden_to_output.shape)
@@ -127,6 +131,7 @@ class NeuralNetwork(object):
         # #### Implement the forward pass here ####
         # # TODO: Hidden layer - replace these values with the appropriate calculations.
         # # TODO: Output layer - Replace these values with the appropriate calculations.
+        features = np.array(features)
         final_outputs, hidden_outputs = self.forward_pass_train(features)
       
         return final_outputs
@@ -137,5 +142,5 @@ class NeuralNetwork(object):
 ##########################################################
 iterations = 3000
 learning_rate = 1.0
-hidden_nodes = 8
+hidden_nodes = 10
 output_nodes = 1
